@@ -45,14 +45,6 @@ function snow(trumpCount){
   }  
 }
 
-var single = [Math.floor(Math.random() * 1200), 0, (Math.random()/5) + .1, Math.floor(Math.random() * 3)]
-while(true) {
-    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight); 
-    if(!(single[1] < 600)) {
-        single[1]++;    
-    }
-    snowFlake(single[0],single[1],single[2],single[3]);
-}
 /**
  * TODO:  Make the snow appear randomly appear on the screen and move 
  * in a verticle direction add an additional variable to account for wind
