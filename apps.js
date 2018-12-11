@@ -12,6 +12,7 @@ wallImg.src = "https://i.imgur.com/WeK70dS.jpg";
 wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
+var wallHeight = 10;
 
 function genTrump() {
     const x = Math.floor(Math.random() * canvas.width);
@@ -32,6 +33,7 @@ function drawFace(f) {
   img.src = trumpArray[f.t];    
   img.onload = function(){
     ctx.drawImage(img, f.x, f.y, img.width * f.s, img.height * f.s)
+    ctx.stroke();
   }
 }
 
@@ -41,7 +43,20 @@ function regenTrump() {
     return newTrump;
 }
 
+function drawLights() {
+  var lightImg = new Image();  
+  lightImg.src = "http://pluspng.com/img-png/png-file-name-christmas-lights-3000.png";
+  lightImg.onload = function() {
+    ctx.drawImage(lightImg, 0, 600 - (wallHeight * 20), lightImg.width / 3, lightImg.height / 3);
+    ctx.drawImage(lightImg, lightImg.width / 3.3, 600 - (wallHeight * 20), lightImg.width / 3, lightImg.height / 3);
+  }
+}
+
 function drawWall(wallCount) {
+    var wallImg = new Image();
+    var wallImg2 = new Image();
+    wallImg.src = "https://i.imgur.com/WeK70dS.jpg";
+    wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";   
     wallImg.onload = function(){
     x = 16;
     for(var i = 0; i < wallCount + 1; i++) {
@@ -50,7 +65,12 @@ function drawWall(wallCount) {
         else
         ctx.drawImage(wallImg2, 0, 600 - ((i+1) * x), canvas.width, 20);    
     }
+    if(wallCount === wallHeight)
+    {
+        ctx.drawImage(lightImg, 0, 600 - (wallHeight * 16), lightImg.width, lightImg.height);
+    }
   }
+  ctx.stroke();
 }
 
 function start() {
@@ -60,18 +80,25 @@ function start() {
         trumpSnow.push(newTrump);
         drawFace(newTrump);
     }
-
+    var fallCount = 0; 
     setInterval(() => {
-        var fallCount = 0; 
+        var wall = Math.floor(fallCount/10);
         ctx.clearRect(0,0,canvas.width, canvas.height);
-        
+        drawWall(wall);
+        if(wall === wallHeight)
+        {
+            drawLights();
+        }
         for(var i = 0; i < trumpSnow.length; i++)
         {
             const trump = trumpSnow[i];
             trump.y += 15 * trump.s;
             if(trump.y > canvas.height)
             {
-                fallCount++;
+                if(wall < wallHeight)
+                {
+                    fallCount++;
+                }
                 console.log('fell');
                 trumpSnow.splice(i,1);
                 trumpSnow.push(regenTrump());
@@ -79,8 +106,6 @@ function start() {
             }
             drawFace(trump);
         }
-        drawWall(10);
     },10)
-    
 }
 start();
