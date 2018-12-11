@@ -13,7 +13,7 @@ function genTrump() {
     const x = Math.floor(Math.random() * 1200);
     const y = 0;
     const s = (Math.random()/5) + .1;
-    const t = Math.floor(Math.random() * 3);
+    const t = Math.floor(Math.random() * trumpArray.length-1);
     return {
         x,
         y,
@@ -48,7 +48,7 @@ function start() {
         for(var i = 0; i < trumpSnow.length; i++)
         {
             const trump = trumpSnow[i];
-            trump.y += 10 * trump.s;
+            trump.y += 20 * trump.s;
             if(trump.y > canvas.height)
             {
                 console.log('fell');
@@ -58,7 +58,7 @@ function start() {
             }
             drawFace(trump);
         }
-    },17)
+    },10)
     
 }
 start();
