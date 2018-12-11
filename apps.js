@@ -12,7 +12,7 @@ wallImg.src = "https://i.imgur.com/WeK70dS.jpg";
 wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
-var wallHeight = 10;
+var wallHeight = 15;
 
 function genTrump() {
     const x = Math.floor(Math.random() * canvas.width);
