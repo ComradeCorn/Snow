@@ -14,8 +14,8 @@ canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 
 function genTrump() {
-    const x = Math.floor(Math.random() * 1200);
-    const y = Math.random() * 599;
+    const x = Math.floor(Math.random() * canvas.width);
+    const y = Math.random() * canvas.height - 1;
     const s = (Math.random()/5) + .1;
     const t = Math.floor(Math.random() * trumpArray.length-1);
     return {
@@ -52,6 +52,7 @@ function drawWall(wallCount) {
     }
   }
 }
+
 function start() {
     for(var i = 0; i < 10; i++)
     {
