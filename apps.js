@@ -13,9 +13,10 @@ wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 var wallHeight = 15;
+var windStrength = 1;
 
 function genTrump() {
-    const x = Math.floor(Math.random() * canvas.width);
+    const x = Math.floor(Math.random() * (canvas.width - 200));
     const y = Math.random() * canvas.height - 1;
     const s = (Math.random()/5) + .1;
     const t = Math.floor(Math.random() * trumpArray.length-1);
@@ -61,13 +62,13 @@ function drawWall(wallCount) {
     x = 16;
     for(var i = 0; i < wallCount + 1; i++) {
         if(i%2 != 0)
-        ctx.drawImage(wallImg, 0, 600 - ((i+1) * x), canvas.width, 20);    
+        ctx.drawImage(wallImg, 0, canvas.height - ((i+1) * x), canvas.width, 20);    
         else
-        ctx.drawImage(wallImg2, 0, 600 - ((i+1) * x), canvas.width, 20);    
+        ctx.drawImage(wallImg2, 0, canvas.height - ((i+1) * x), canvas.width, 20);    
     }
     if(wallCount === wallHeight)
     {
-        ctx.drawImage(lightImg, 0, 600 - (wallHeight * 16), lightImg.width, lightImg.height);
+        ctx.drawImage(lightImg, 0, canvas.height - (wallHeight * 16), lightImg.width, lightImg.height);
     }
   }
   ctx.stroke();
@@ -93,6 +94,7 @@ function start() {
         {
             const trump = trumpSnow[i];
             trump.y += 15 * trump.s;
+            trump.x += windStrength;
             if(trump.y > canvas.height)
             {
                 if(wall < wallHeight)
