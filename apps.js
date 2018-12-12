@@ -6,21 +6,26 @@ var trumpArray = [];
   trumpArray[1] = "https://i.4pcdn.org/pol/1505780635116.png";
   trumpArray[2] = "https://clipart.info/images/ccovers/1495816051donald-trump-face-png-big-smile.png";
   trumpArray[3] = "http://www.stickpng.com/assets/images/5841c17aa6515b1e0ad75aa1.png";
-  trumpArray[4] = "http://www.stickpng.com/assets/thumbs/58970095cba9841eabab6103.png";
+  trumpArray[4] = "https://clipart.info/images/ccovers/1495816049surprised-face-trump-png-transparent-clip-art.png";
+  trumpArray[5] = "http://www.stickpng.com/assets/thumbs/58970095cba9841eabab6103.png";
+  trumpArray[6] = "https://clipart.info/images/ccovers/1523212417donald-trump-head-kiss-png.png";
 var wallImg = new Image();
-var wallImg2 = new Image()
+var wallImg2 = new Image();
 wallImg.src = "https://i.imgur.com/WeK70dS.jpg";
 wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
-var wallHeight = 15;
+var wallHeight = 14;
 var windStrength = 1;
+var trumpSound = new Audio();
+trumpSound.src = "https://vocaroo.com/media_command.php?media=s0Hs7S6yNSRz&command=download_mp3";
+
 
 function genTrump() {
     const x = Math.floor(Math.random() * (canvas.width - 200));
     const y = Math.random() * canvas.height - 1;
     const s = (Math.random()/5) + .1;
-    const t = Math.floor(Math.random() * trumpArray.length-1);
+    const t = Math.floor(Math.random() * trumpArray.length);
     return {
         x,
         y,
@@ -82,14 +87,21 @@ function start() {
         trumpSnow.push(newTrump);
         drawFace(newTrump);
     }
+    var lastSize = 0; 
     var fallCount = 0; 
+    var wall = 0;
     setInterval(() => {
-        var wall = Math.floor(fallCount/10);
+        lastSize = wall;
+        wall = Math.floor(fallCount/20);
         ctx.clearRect(0,0,canvas.width, canvas.height);
         drawWall(wall);
         if(wall === wallHeight)
         {
             drawLights();
+        }
+        if(wall > lastSize)
+        {
+            trumpSound.play();
         }
         for(var i = 0; i < trumpSnow.length; i++)
         {
@@ -102,7 +114,7 @@ function start() {
                 {
                     fallCount++;
                 }
-                console.log('fell');
+                //console.log('fell');
                 trumpSnow.splice(i,1);
                 trumpSnow.push(regenTrump());
                 i--;
