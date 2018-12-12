@@ -6,6 +6,7 @@ var trumpArray = [];
   trumpArray[1] = "https://i.4pcdn.org/pol/1505780635116.png";
   trumpArray[2] = "https://clipart.info/images/ccovers/1495816051donald-trump-face-png-big-smile.png";
   trumpArray[3] = "http://www.stickpng.com/assets/images/5841c17aa6515b1e0ad75aa1.png";
+  trumpArray[4] = "http://www.stickpng.com/assets/thumbs/58970095cba9841eabab6103.png";
 var wallImg = new Image();
 var wallImg2 = new Image()
 wallImg.src = "https://i.imgur.com/WeK70dS.jpg";
