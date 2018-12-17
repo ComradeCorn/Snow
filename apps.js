@@ -17,8 +17,14 @@ canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
 var wallHeight = 14;
 var windStrength = 1;
-var trumpSound = new Audio();
-trumpSound.src = "https://vocaroo.com/media_command.php?media=s0Hs7S6yNSRz&command=download_mp3";
+var soundArray = [];
+  soundArray[0] = "https://vocaroo.com/media_command.php?media=s0Hs7S6yNSRz&command=download_mp3";
+  soundArray[1] = "https://sound.peal.io/ps/audios/000/001/376/original/youtube.mp3?1485480477";
+  soundArray[2] = "https://sound.peal.io/ps/audios/000/000/833/original/get_out_of_here.wav?1469744403";
+  soundArray[3] = "https://sound.peal.io/ps/audios/000/000/841/original/youtube.mp3?1469744351";
+  soundArray[4] = "https://sound.peal.io/ps/audios/000/000/770/original/nobody_will_be_tougher_on_isis_than_donald_trump.wav?1469744365";
+
+
 
 
 function genTrump() {
@@ -80,6 +86,12 @@ function drawWall(wallCount) {
   ctx.stroke();
 }
 
+function playSound() {
+    var trumpSound = new Audio();
+    trumpSound.src = soundArray[Math.floor(Math.random() * soundArray.length)];
+    trumpSound.play();
+}
+
 function start() {
     for(var i = 0; i < 10; i++)
     {
@@ -101,7 +113,7 @@ function start() {
         }
         if(wall > lastSize)
         {
-            trumpSound.play();
+            playSound();
         }
         for(var i = 0; i < trumpSnow.length; i++)
         {
