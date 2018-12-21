@@ -28,7 +28,6 @@ var anthem = new Audio();
 anthem.src = "https://vocaroo.com/media_command.php?media=s0xC0eUmZuAH&command=download_mp3";
 anthem.loop = true;
 anthem.volume = .5;
-anthem.play();
 
 function genTrump() {
     const x = Math.floor(Math.random() * (canvas.width));
@@ -43,6 +42,12 @@ function genTrump() {
     };
 }
 
+function fChrome() {
+  if(true = true)
+  {
+    anthem.play();
+  }
+}
 
 function drawFace(f) {
   var img = new Image();
@@ -119,6 +124,7 @@ function start() {
     var lastSize = 0; 
     var fallCount = 0; 
     var wall = 0;
+    fChrome();
     setInterval(() => {
         lastSize = wall;
         wall = Math.floor(fallCount/20);
