@@ -1,5 +1,7 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
 var trumpSnow = [];
 var trumpArray = [];
   trumpArray[0] = "https://clipart.info/images/ccovers/1495816050trump-face-fuck-angry-transparent-png.png";
@@ -9,12 +11,6 @@ var trumpArray = [];
   trumpArray[4] = "https://clipart.info/images/ccovers/1495816049surprised-face-trump-png-transparent-clip-art.png";
   trumpArray[5] = "http://www.stickpng.com/assets/thumbs/58970095cba9841eabab6103.png";
   trumpArray[6] = "https://clipart.info/images/ccovers/1523212417donald-trump-head-kiss-png.png";
-var wallImg = new Image();
-var wallImg2 = new Image();
-wallImg.src = "https://i.imgur.com/WeK70dS.jpg";
-wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
 var wallHeight = 14;
 var windStrength = 1;
 var soundArray = [];
@@ -23,7 +19,15 @@ var soundArray = [];
   soundArray[2] = "https://sound.peal.io/ps/audios/000/000/833/original/get_out_of_here.wav?1469744403";
   soundArray[3] = "https://sound.peal.io/ps/audios/000/000/841/original/youtube.mp3?1469744351";
   soundArray[4] = "https://sound.peal.io/ps/audios/000/000/770/original/nobody_will_be_tougher_on_isis_than_donald_trump.wav?1469744365";
-
+var wallImg = new Image();
+var wallImg2 = new Image();
+wallImg.src = "https://i.imgur.com/WeK70dS.jpg";
+wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";
+var anthem = new Audio();
+anthem.src = "https://vocaroo.com/media_command.php?media=s0xC0eUmZuAH&command=download_mp3";
+anthem.loop = true;
+anthem.volume = .8;
+anthem.play();
 
 
 
