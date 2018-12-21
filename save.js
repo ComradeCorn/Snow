@@ -1,82 +1,140 @@
-//just in case I want to save an earlier version of my code
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
-var trumpSnow = [];
-var trumpArray = [new Image(), new Image(), new Image(), new Image()];
-  trumpArray[0].src = "https://clipart.info/images/ccovers/1495816050trump-face-fuck-angry-transparent-png.png";
-  trumpArray[1].src = "https://i.4pcdn.org/pol/1505780635116.png";
-  trumpArray[2].src = "https://clipart.info/images/ccovers/1495816051donald-trump-face-png-big-smile.png";
-  trumpArray[3].src = "http://www.stickpng.com/assets/images/5841c17aa6515b1e0ad75aa1.png";
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
+var trumpSnow = [];
+var trumpArray = [];
+  trumpArray[0] = "https://clipart.info/images/ccovers/1495816050trump-face-fuck-angry-transparent-png.png";
+  trumpArray[1] = "https://i.4pcdn.org/pol/1505780635116.png";
+  trumpArray[2] = "https://clipart.info/images/ccovers/1495816051donald-trump-face-png-big-smile.png";
+  trumpArray[3] = "http://www.stickpng.com/assets/images/5841c17aa6515b1e0ad75aa1.png";
+  trumpArray[4] = "https://clipart.info/images/ccovers/1495816049surprised-face-trump-png-transparent-clip-art.png";
+  trumpArray[5] = "http://www.stickpng.com/assets/thumbs/58970095cba9841eabab6103.png";
+  trumpArray[6] = "https://clipart.info/images/ccovers/1523212417donald-trump-head-kiss-png.png";
+var wallHeight = 14;
+var windStrength = 1;
+var soundArray = [];
+  soundArray[0] = "https://vocaroo.com/media_command.php?media=s0Hs7S6yNSRz&command=download_mp3";
+  soundArray[1] = "https://sound.peal.io/ps/audios/000/001/376/original/youtube.mp3?1485480477";
+  soundArray[2] = "https://sound.peal.io/ps/audios/000/000/833/original/get_out_of_here.wav?1469744403";
+  soundArray[3] = "https://sound.peal.io/ps/audios/000/000/841/original/youtube.mp3?1469744351";
+  soundArray[4] = "https://sound.peal.io/ps/audios/000/000/770/original/nobody_will_be_tougher_on_isis_than_donald_trump.wav?1469744365";
+var wallImg = new Image();
+var wallImg2 = new Image();
+wallImg.src = "https://i.imgur.com/WeK70dS.jpg";
+wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";
+var anthem = new Audio();
+anthem.src = "https://vocaroo.com/media_command.php?media=s0xC0eUmZuAH&command=download_mp3";
+anthem.loop = true;
+anthem.volume = .5;
+anthem.play();
 
-/**
- * Constructor for a single snow flake 
- */
+function genTrump() {
+    const x = Math.floor(Math.random() * (canvas.width - 200));
+    const y = Math.random() * canvas.height - 1;
+    const s = (Math.random()/5) + .1;
+    const t = Math.floor(Math.random() * trumpArray.length);
+    return {
+        x,
+        y,
+        s,
+        t
+    };
+}
 
 
-function snowFlake(x,y,s,t) {
-  this.x = x;
-  this.y = y;
-  this.s = s;
-  this.t = t; 
-  var trumpSelect = Math.floor(Math.random() * trumpArray.length);  
-  t.onload = function(){
-    ctx.drawImage(t, x, y, t.width * s, t.height * s)
+function drawFace(f) {
+  var img = new Image();
+  img.src = trumpArray[f.t];    
+  img.onload = function(){
+    ctx.drawImage(img, f.x, f.y, img.width * f.s, img.height * f.s)
+    ctx.stroke();
   }
-  
-}
-snowFlake(500, 20, .2, trumpArray[1]);
-snowFlake(100, 20, .4, trumpArray[1]);
-/** 
- * TODO: Complete the function below to make lots of snow.   
- * Create each snowflake using the snowFlake constructor and 
- * populate the snowArray with your snowflakes
- * Each snow flake must be of random sizes and populate
- * the screen randomly in the y and x directions
- * Feel free to add a parameter to specify the amount of snow
- */
-
-function snow(){
-  
-  var numberFlake = 20;
-  for(var i = 0; i < numberFlake; i++)
-  {
-    trumpArray[i] = new snowFlake((Math.floor(Math.random() * 1200), 20, (Math.random()/5) + .1, trumpArray[Math.floor(Math.random() * trumpArray.length)]))
-    trumpArray[i];
-  }  
 }
 
-
-/**
- * TODO:  Make the snow appear randomly appear on the screen and move 
- * in a verticle direction add an additional variable to account for wind
- */
-
-function drawSnow(){
-  //The command below is needed to clear the screen between each movement
-  ctx.clearRect(0, 0, window.innerWidth, window.innerHeight); 
-      
-  //The command below is needed to animate the snow
-  window.requestAnimationFrame(drawSnow);  
-}
-snow();
-/**
- * TODO: Complete the function below to move each snow flake to the 
- * top of the screen once it has reached the bottom.
- */
-function moveSnow(){
-  
+function regenTrump() {
+    newTrump = genTrump();
+    newTrump.y = 0;
+    return newTrump;
 }
 
-
-/**
- * TODO: Complete the drawScene function below.
- * Inside this function, call the additional functions needed to
- * complete your scene
- */
-function drawScene(){
-
+function drawLights() {
+  var lightImg = new Image();  
+  lightImg.src = "http://pluspng.com/img-png/png-file-name-christmas-lights-3000.png";
+  lightImg.onload = function() {
+    ctx.drawImage(lightImg, 0, 600 - (wallHeight * 20), lightImg.width / 3, lightImg.height / 3);
+    ctx.drawImage(lightImg, lightImg.width / 3.3, 600 - (wallHeight * 20), lightImg.width / 3, lightImg.height / 3);
+  }
 }
 
-drawScene();
+function drawWall(wallCount) {
+    var wallImg = new Image();
+    var wallImg2 = new Image();
+    wallImg.src = "https://i.imgur.com/WeK70dS.jpg";
+    wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";   
+    wallImg.onload = function(){
+    x = 16;
+    for(var i = 0; i < wallCount + 1; i++) {
+        if(i%2 != 0)
+        ctx.drawImage(wallImg, 0, canvas.height - ((i+1) * x), canvas.width, 20);    
+        else
+        ctx.drawImage(wallImg2, 0, canvas.height - ((i+1) * x), canvas.width, 20);    
+    }
+    if(wallCount === wallHeight)
+    {
+        ctx.drawImage(lightImg, 0, canvas.height - (wallHeight * 16), lightImg.width, lightImg.height);
+    }
+  }
+  ctx.stroke();
+}
+
+function playSound() {
+    var trumpSound = new Audio();
+    trumpSound.src = soundArray[Math.floor(Math.random() * soundArray.length)];
+    trumpSound.play();
+}
+
+function start() {
+    for(var i = 0; i < 10; i++)
+    {
+        const newTrump = genTrump();
+        trumpSnow.push(newTrump);
+        drawFace(newTrump);
+    }
+    var lastSize = 0; 
+    var fallCount = 0; 
+    var wall = 0;
+    setInterval(() => {
+        lastSize = wall;
+        wall = Math.floor(fallCount/20);
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+        drawWall(wall);
+        if(wall === wallHeight)
+        {
+            drawLights();
+        }
+        if(wall > lastSize)
+        {
+            playSound();
+        }
+        for(var i = 0; i < trumpSnow.length; i++)
+        {
+            const trump = trumpSnow[i];
+            trump.y += 15 * trump.s;
+            trump.x += windStrength;
+            if(trump.y > canvas.height)
+            {
+                if(wall < wallHeight)
+                {
+                    fallCount++;
+                }
+                //console.log('fell');
+                trumpSnow.splice(i,1);
+                trumpSnow.push(regenTrump());
+                i--;
+            }
+            drawFace(trump);
+        }
+    },10)
+}
+start();

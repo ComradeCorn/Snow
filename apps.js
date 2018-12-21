@@ -2,6 +2,7 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
+half = canvas.width/2;
 var trumpSnow = [];
 var trumpArray = [];
   trumpArray[0] = "https://clipart.info/images/ccovers/1495816050trump-face-fuck-angry-transparent-png.png";
@@ -12,7 +13,7 @@ var trumpArray = [];
   trumpArray[5] = "http://www.stickpng.com/assets/thumbs/58970095cba9841eabab6103.png";
   trumpArray[6] = "https://clipart.info/images/ccovers/1523212417donald-trump-head-kiss-png.png";
 var wallHeight = 14;
-var windStrength = 1;
+var windStrength = 0;
 var soundArray = [];
   soundArray[0] = "https://vocaroo.com/media_command.php?media=s0Hs7S6yNSRz&command=download_mp3";
   soundArray[1] = "https://sound.peal.io/ps/audios/000/001/376/original/youtube.mp3?1485480477";
@@ -30,7 +31,7 @@ anthem.volume = .5;
 anthem.play();
 
 function genTrump() {
-    const x = Math.floor(Math.random() * (canvas.width - 200));
+    const x = Math.floor(Math.random() * (canvas.width));
     const y = Math.random() * canvas.height - 1;
     const s = (Math.random()/5) + .1;
     const t = Math.floor(Math.random() * trumpArray.length);
@@ -93,6 +94,24 @@ function playSound() {
     trumpSound.src = soundArray[Math.floor(Math.random() * soundArray.length)];
     trumpSound.play();
 }
+
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return evt.clientX - rect.left;
+  }
+
+  canvas.addEventListener('click', function(evt) {
+    var mousePos = getMousePos(canvas, evt);
+    if(mousePos < half)
+    {
+        mousePos = (-.01 * (half - mousePos));
+    }
+    else
+    {
+        mousePos = (.01 * (mousePos-half));
+    }
+    windStrength = mousePos;
+  }, false);
 
 function start() {
     for(var i = 0; i < 10; i++)
