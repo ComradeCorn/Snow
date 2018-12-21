@@ -26,10 +26,8 @@ wallImg2.src = "https://i.imgur.com/zSMXZJs.jpg";
 var anthem = new Audio();
 anthem.src = "https://vocaroo.com/media_command.php?media=s0xC0eUmZuAH&command=download_mp3";
 anthem.loop = true;
-anthem.volume = .8;
+anthem.volume = .5;
 anthem.play();
-
-
 
 function genTrump() {
     const x = Math.floor(Math.random() * (canvas.width - 200));
