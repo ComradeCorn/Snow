@@ -8,9 +8,9 @@ var trumpArray = [];
   trumpArray[0] = "https://clipart.info/images/ccovers/1495816050trump-face-fuck-angry-transparent-png.png";
   trumpArray[1] = "https://i.4pcdn.org/pol/1505780635116.png";
   trumpArray[2] = "https://clipart.info/images/ccovers/1495816051donald-trump-face-png-big-smile.png";
-  trumpArray[3] = "http://www.stickpng.com/assets/images/5841c17aa6515b1e0ad75aa1.png";
+  trumpArray[3] = "https://www.stickpng.com/assets/images/5841c17aa6515b1e0ad75aa1.png";
   trumpArray[4] = "https://clipart.info/images/ccovers/1495816049surprised-face-trump-png-transparent-clip-art.png";
-  trumpArray[5] = "http://www.stickpng.com/assets/thumbs/58970095cba9841eabab6103.png";
+  trumpArray[5] = "https://www.stickpng.com/assets/thumbs/58970095cba9841eabab6103.png";
   trumpArray[6] = "https://clipart.info/images/ccovers/1523212417donald-trump-head-kiss-png.png";
 var wallHeight = 14;
 var windStrength = 0;
@@ -63,8 +63,8 @@ function drawLights() {
   var lightImg = new Image();  
   lightImg.src = "http://pluspng.com/img-png/png-file-name-christmas-lights-3000.png";
   lightImg.onload = function() {
-    ctx.drawImage(lightImg, 0, 600 - (wallHeight * 20), lightImg.width / 3, lightImg.height / 3);
-    ctx.drawImage(lightImg, lightImg.width / 3.3, 600 - (wallHeight * 20), lightImg.width / 3, lightImg.height / 3);
+    ctx.drawImage(lightImg, 0, canvas.height - (wallHeight * 20), lightImg.width / 3, lightImg.height / 3);
+    ctx.drawImage(lightImg, lightImg.width / 3.3, canvas.height - (wallHeight * 20), lightImg.width / 3, lightImg.height / 3);
   }
 }
 
@@ -80,10 +80,6 @@ function drawWall(wallCount) {
         ctx.drawImage(wallImg, 0, canvas.height - ((i+1) * x), canvas.width, 20);    
         else
         ctx.drawImage(wallImg2, 0, canvas.height - ((i+1) * x), canvas.width, 20);    
-    }
-    if(wallCount === wallHeight)
-    {
-        ctx.drawImage(lightImg, 0, canvas.height - (wallHeight * 16), lightImg.width, lightImg.height);
     }
   }
   ctx.stroke();
